@@ -56,7 +56,7 @@ public class QuestionService {
             repo.delete(question);
         }
         else{
-            throw new RuntimeException("id not found");
+            throw new RuntimeException("id is not found");
         }
         return "deleted";
     }
