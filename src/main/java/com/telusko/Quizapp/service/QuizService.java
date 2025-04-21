@@ -3,7 +3,7 @@ package com.telusko.Quizapp.service;
 import com.telusko.Quizapp.Model.Question;
 import com.telusko.Quizapp.Model.QuestionWrapper;
 import com.telusko.Quizapp.Model.Quiz;
-import com.telusko.Quizapp.Model.response;
+import com.telusko.Quizapp.Model.Response;
 import com.telusko.Quizapp.Repo.QuestionRepo;
 import com.telusko.Quizapp.Repo.QuizRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +14,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
-import java.util.random.RandomGenerator;
-import java.util.random.RandomGeneratorFactory;
 
 @Service
 public class QuizService {
@@ -50,5 +47,19 @@ public class QuizService {
         return new ResponseEntity<>(questionforuser, HttpStatus.OK);
 
 
+    }
+
+    public ResponseEntity<Integer> calculate(Integer id, List<Response> responses){
+        Quiz q = quizrepo.findById(id).get();
+        List<Question> questions = q.getQuestions();
+        int right=0;
+        int i=0;
+        for(Response responsess:responses ){
+            if(responsess.getResponse().equals(questions.get(i).getRightAnswer()))
+                right++;
+
+            i++;
+        }
+        return new ResponseEntity<>(right,HttpStatus.OK);
     }
 }

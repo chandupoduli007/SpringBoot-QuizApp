@@ -1,8 +1,7 @@
 package com.telusko.Quizapp.controller;
 
-import com.telusko.Quizapp.Model.Question;
 import com.telusko.Quizapp.Model.QuestionWrapper;
-import com.telusko.Quizapp.Model.response;
+import com.telusko.Quizapp.Model.Response;
 import com.telusko.Quizapp.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,5 +27,8 @@ public class QuizController {
 
      }
 
-
+   @PostMapping("submit/{id}")
+    public ResponseEntity<Integer> submit(@PathVariable Integer id,@RequestBody List<Response> responses){
+       return quizservice.calculate(id, responses);
+   }
 }
