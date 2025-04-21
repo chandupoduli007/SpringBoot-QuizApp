@@ -48,7 +48,7 @@ public class QuizService {
 
 
     }
-
+// to find the correct score
     public ResponseEntity<Integer> calculate(Integer id, List<Response> responses){
         Quiz q = quizrepo.findById(id).get();
         List<Question> questions = q.getQuestions();
